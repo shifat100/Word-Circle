@@ -1,0 +1,325 @@
+/* style.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* Common sans-serif stack */
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333;
+    font-size: 16px; /* Base font size for KaiOS, adjust as needed */
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll */
+    -moz-user-select: none; /* Prevent text selection */
+}
+
+.container {
+    width: 100%;
+    height: calc(100% - 30px); /* Full height minus softkey bar */
+    overflow: hidden; /* Prevent container scroll, individual screens will scroll if needed */
+    position: relative;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */ /* Changed to space-between or flex-start for more control */
+    justify-content: flex-start; /* Align content to top by default */
+    padding: 8px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow vertical scroll if content overflows screen */
+    background-color: #fff; /* White background for screens */
+}
+
+.screen-title {
+    font-size: 1.1em; /* Slightly larger for titles */
+    color: #007bff; /* A theme color */
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-text {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.app-version {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.7em;
+    color: #aaa;
+}
+
+
+/* Button Styling */
+button {
+    display: block;
+    width: calc(100% - 10px); /* Buttons take most of the width */
+    padding: 8px 10px;
+    margin: 4px auto; /* Reduced margin */
+    font-size: 0.95em; /* Slightly smaller font for buttons */
+    background-color: #e9e9e9; /* Light gray buttons */
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: default; /* KaiOS doesn't use mouse cursors typically */
+}
+
+button:disabled {
+    background-color: #d0d0d0;
+    color: #888;
+    border-color: #bbb;
+}
+
+.kaios-focus {
+    background-color: #007bff; /* Primary color for focus */
+    color: white;
+    border-color: #0056b3;
+    outline: none; /* Remove default outline */
+}
+
+.secondary-button {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+}
+.secondary-button.kaios-focus {
+    background-color: #5a6268;
+    border-color: #4e555b;
+    color: white;
+}
+
+.button-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button-list.single-col-buttons {
+    max-width: 200px; /* For screens with fewer, more prominent buttons */
+    margin: auto;
+}
+
+
+/* Input field styling */
+input[type="text"], input[type="number"] {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin: 8px auto;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+input[type="text"].kaios-focus, input[type="number"].kaios-focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 1px #007bff; /* Subtle focus ring */
+    outline: none;
+}
+.kaios-input { /* Class for general KaiOS input styling */
+    caret-color: #007bff; /* Match focus color */
+}
+
+
+/* Scrollable Lists (for language lists) */
+.scrollable-list {
+    width: 100%;
+    max-height: calc(100% - 80px); /* Adjust based on surrounding elements */
+    overflow-y: auto;
+    border: 1px solid #eee;
+    margin-bottom: 8px;
+}
+.scrollable-list button { /* Buttons inside lists */
+    width: calc(100% - 4px); /* Slightly less width to account for scrollbar potential */
+    margin: 2px;
+    text-align: left;
+    padding-left: 10px;
+}
+/* Language Management Item Styling */
+.language-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 3px; /* Reduced padding */
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    box-sizing: border-box;
+}
+.language-item span {
+    flex-grow: 1;
+    font-size: 0.9em;
+    padding-right: 5px;
+}
+.language-item button {
+    margin-left: 5px;
+    padding: 4px 6px;
+    font-size: 0.85em;
+    width: auto; /* Let button size to content */
+    min-width: 70px; /* Minimum width for action buttons */
+    flex-shrink: 0; /* Prevent button from shrinking too much */
+}
+
+.delete-lang-button {
+    background-color: #dc3545;
+    color: white;
+}
+.delete-lang-button.kaios-focus {
+    background-color: #c82333;
+}
+
+/* Game Screen Specifics */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2px 5px;
+    font-size: 0.8em;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+.game-header .left { text-align: left; flex:1; }
+.game-header .center { text-align: center; flex:2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.game-header .right { text-align: right; flex:1; }
+
+.puzzle-display {
+    display: flex;
+    flex-wrap: wrap; /* Allow glyphs to wrap */
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    padding: 5px;
+    min-height: 40px; /* Ensure some space for puzzle */
+    width: 100%;
+    box-sizing: border-box;
+}
+.puzzle-char {
+    font-size: 1.4em; /* Larger font for puzzle characters */
+    padding: 2px 4px;
+    margin: 2px;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    min-width: 25px; /* Minimum width for each char box */
+    text-align: center;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+.puzzle-char.revealed-char {
+    background-color: #d4edda; /* Greenish for revealed */
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-message {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 8px 0;
+    min-height: 1.2em; /* Reserve space for the message */
+    text-align: center;
+}
+.result-message.correct { color: #28a745; } /* Green */
+.result-message.incorrect { color: #dc3545; } /* Red */
+.result-message.warning { color: #ffc107; } /* Yellow */
+.result-message.revealed { color: #17a2b8; } /* Teal */
+
+.game-buttons-container { /* Container for game action buttons to manage their layout */
+    width: 100%;
+    display: flex; /* Default to hidden in HTML, shown via JS */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+.game-buttons-container button {
+    display: block; /* Ensure they are block for consistent width */
+}
+#quit-game-button { /* This button is usually controlled by softkey, can be hidden */
+    /* display: none !important; */ /* If purely softkey driven */
+}
+
+/* Content Box for Instructions/About */
+.content-box {
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 1;
+    text-align: left;
+    border: 1px solid #eee;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+.content-box ul {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+.content-box li {
+    margin-bottom: 3px;
+}
+
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.75);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* High z-index */
+    font-size: 1.1em;
+}
+#loading-overlay p {
+    padding: 10px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+
+/* Softkey Bar */
+#softkey-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #333; /* Dark background for softkeys */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    box-sizing: border-box;
+    z-index: 5000;
+}
+.softkey-label {
+    font-size: 0.85em;
+    padding: 0 5px;
+    text-align: center;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#softkey-left { text-align: left; }
+#softkey-center { font-weight: bold; }
+#softkey-right { text-align: right; }
