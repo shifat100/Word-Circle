@@ -1,1 +1,176 @@
-under constraction
+<!DOCTYPE html>
+<html lang="en"> <!-- lang will be updated by JS to currentSystemLang -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title data-i18n-key="app_title">Word Puzzle</title> <!-- Title also set by JS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="initial-loading-screen" class="screen" style="display: flex;">
+            <!-- Ensure these elements have data-i18n-key for auto-translation -->
+            <h1 data-i18n-key="app_title"><!-- Text set by JS initially, then by i18n --></h1>
+            <p data-i18n-key="loading_ellipsis"><!-- Text set by JS initially, then by i18n --></p>
+            <p class="app-version-container"><span data-i18n-key="version_label"></span><span class="app-version"></span></p>
+        </div>
+        
+        <!-- No Languages Prompt Screen -->
+        <div id="no-languages-prompt-screen" class="screen" style="display: none;">
+            <h2 class="screen-title" data-i18n-key="need_language_title">Language Needed</h2>
+            <p data-i18n-key="no_languages_prompt_message">No game languages are downloaded.<br/>Please download a language to play.</p>
+            <div class="button-list">
+                <button id="go-to-language-management-button" data-i18n-key="manage_languages" data-softright-key="softkey_download">Manage Languages</button>
+                <button id="exit-app-prompt-button" data-i18n-key="exit_app" data-softright-key="softkey_exit">Exit</button>
+            </div>
+        </div>
+
+        <!-- Language Selection Screen (for Game Content) -->
+        <div id="language-selection-screen" class="screen" style="display: none;" data-default-focus="manage-languages-from-select-button">
+            <h2 class="screen-title" data-i18n-key="select_language_title">Word Pack Language</h2>
+            <div id="downloaded-languages-list-container" class="scrollable-list">
+                <!-- Buttons for each downloaded game language will be populated here -->
+            </div>
+            <p id="no-downloaded-languages-message" style="display:none;" data-i18n-key="no_downloaded_languages_message_text">No languages found to play. <br/>Download from Manage Languages.</p>
+            <!-- This button is focusable, so it can be a default focus -->
+            <button id="manage-languages-from-select-button" data-i18n-key="manage_languages" data-softleft-key="softkey_options" data-softright-key="softkey_select">Manage Languages</button>
+        </div>
+
+        <!-- Game Mode Screen -->
+        <div id="game-mode-screen" class="screen" style="display: none;" data-default-focus="start-random-game-mode-button">
+            <h2 class="screen-title" data-i18n-key="game_mode_title">Game Mode</h2>
+            <p class="info-text"><span data-i18n-key="language_label">Language:</span> <span id="selected-lang-for-mode"></span></p>
+            <div class="button-list">
+                <button id="start-random-game-mode-button" data-i18n-key="random_20_questions" data-softright-key="softkey_play">Random (20 Questions)</button>
+                <button id="start-custom-game-mode-button" data-i18n-key="custom_questions" data-softright-key="softkey_select">Custom Questions</button>
+                <button id="back-to-lang-select-button" data-i18n-key="change_language" data-softleft-key="softkey_back" data-softright-key="softkey_select">Change Language</button>
+                <button id="go-to-main-settings-button" data-i18n-key="settings_and_info" data-softright-key="softkey_select">Settings & Info</button>
+            </div>
+        </div>
+
+        <!-- Settings & Info Screen -->
+        <div id="settings-info-screen" class="screen" style="display: none;" data-default-focus="instructions-button-settings">
+            <h2 class="screen-title" data-i18n-key="settings_info_title">Settings & Info</h2>
+             <div class="button-list">
+                <button id="instructions-button-settings" data-i18n-key="instructions">Instructions</button>
+                <button id="about-button-settings" data-i18n-key="about">About</button>
+                <button id="manage-languages-settings-button" data-i18n-key="manage_languages">Manage Game Languages</button>
+                <button id="app-language-settings-button" data-i18n-key="app_language_settings_title">App Language</button> <!-- NEW BUTTON -->
+                <button id="back-to-game-mode-from-settings-button" data-i18n-key="back_to_mode" data-softleft-key="softkey_back">Back to Mode</button>
+            </div>
+        </div>
+
+        <!-- App Language Settings Screen (NEW SCREEN for UI Language) -->
+        <div id="app-language-settings-screen" class="screen" style="display: none;" data-default-focus="back-from-app-lang-settings-button">
+            <h2 class="screen-title" data-i18n-key="app_language_settings_title">App Language</h2>
+            <div id="app-language-list-container" class="scrollable-list">
+                <!-- Buttons for each supported UI language (e.g., English, Bengali) will be populated here -->
+            </div>
+            <button id="back-from-app-lang-settings-button" data-i18n-key="back" data-softleft-key="softkey_back" data-softright-key="softkey_select">Back</button>
+        </div>
+
+
+        <!-- Custom Game Setup Screen -->
+        <div id="custom-setup-screen" class="screen" style="display: none;" data-default-focus="custom-number-input">
+            <h2 class="screen-title" data-i18n-key="custom_game_title">Custom Game</h2>
+            <label for="custom-number-input" id="custom-game-questions-label"></label>
+            <input type="number" id="custom-number-input" min="1" value="5" class="kaios-input has-text-input">
+            <div class="button-list single-col-buttons">
+                <button id="start-custom-game-button" data-i18n-key="start_game" data-softright-key="softkey_start">Start Game</button>
+                <button id="back-to-game-mode-button" data-i18n-key="mode_label" data-softleft-key="softkey_back" data-softright-key="softkey_select">Mode</button>
+            </div>
+        </div>
+
+        <!-- Language Management Screen (for Game Content) -->
+        <div id="language-management-screen" class="screen" style="display: none;" data-default-focus="check-for-updates-button">
+            <h2 class="screen-title" data-i18n-key="lang_man_title">Manage Game Languages</h2>
+            <div id="available-languages-list-container" class="scrollable-list">
+                <!-- Language items will be populated here -->
+            </div>
+            <p id="language-list-message"></p>
+            <div class="button-list">
+                 <button id="check-for-updates-button" data-i18n-key="check_for_updates" data-softright-key="softkey_check">Check for Updates</button>
+                 <button id="back-from-lang-manage-button" data-i18n-key="back" data-softleft-key="softkey_back" data-softright-key="softkey_select">Back</button>
+            </div>
+        </div>
+
+        <!-- Instructions Screen -->
+        <div id="instructions-screen" class="screen" style="display: none;" data-default-focus="back-to-settings-from-instructions-button">
+            <h2 class="screen-title" data-i18n-key="instructions_title">Instructions</h2>
+            <div id="instructions-content-box" class="content-box" data-focusable="true" data-softcenter-key="softkey_scroll" tabindex="0">
+                <p data-i18n-key="instructions_text_main">Unscramble the letters to form the correct word.</p>
+                <p data-i18n-key="instructions_text_navigation">Navigation:</p>
+                <ul>
+                    <li data-i18n-key="instructions_nav_item1">Up/Down Arrows: Change selection.</li>
+                    <li data-i18n-key="instructions_nav_item2">Enter / Center Key: Select / Submit.</li>
+                    <li data-i18n-key="instructions_nav_item3">Left Softkey: Contextual options.</li>
+                    <li data-i18n-key="instructions_nav_item4">Right Softkey: Contextual options.</li>
+                    <li data-i18n-key="instructions_nav_item5"># (Hash) Key: Reveal answer (during game).</li>
+                </ul>
+            </div>
+            <button id="back-to-settings-from-instructions-button" data-i18n-key="back" data-softleft-key="softkey_back" data-softright-key="softkey_select">Back</button>
+        </div>
+
+        <!-- About Screen -->
+        <div id="about-screen" class="screen" style="display: none;" data-default-focus="back-to-settings-from-about-button">
+            <h2 class="screen-title" data-i18n-key="about_title">About</h2>
+            <div class="content-box" data-focusable="true" data-softcenter-key="softkey_scroll" tabindex="0">
+                <p data-i18n-key="app_name_in_about">Word Puzzle</p>
+                <p><span data-i18n-key="version_label">Version:</span> <span class="app-version">1.0.1</span></p>
+                <p data-i18n-key="developer_label">Developer: Your Name</p>
+                <p data-i18n-key="copyright_text">© 2024</p>
+            </div>
+            <button id="back-to-settings-from-about-button" data-i18n-key="back" data-softleft-key="softkey_back" data-softright-key="softkey_select">Back</button>
+        </div>
+
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen" style="display: none;" data-default-focus="answer-input">
+            <div class="game-header">
+                <span class="header-info left"><span data-i18n-key="score_display_label">Score:</span> <span id="score">0</span></span>
+                <span class="header-info center"><span data-i18n-key="game_language_ui_label">Language:</span> <span id="game-screen-language-name"></span></span>
+                <span class="header-info right"><span id="current-puzzle-count">0</span>/<span id="total-puzzles">0</span></span>
+            </div>
+            <div id="puzzle-container" class="puzzle-display"></div>
+            <input type="text" id="answer-input" data-i18n-key="answer_placeholder" placeholder="Type answer..." x-inputmode="verbatim" class="kaios-input has-text-input">
+            <p id="result" class="result-message"></p>
+            <div class="game-buttons-container" style="display:none"> <!-- Initially hidden, shown by JS -->
+                 <button id="submit-button" data-i18n-key="submit">Submit</button>
+                 <button id="reveal-answer-button" class="secondary-button" data-i18n-key="reveal_answer">Reveal</button>
+                 <button id="next-question-button" class="secondary-button" data-i18n-key="next_question" style="display:none;">Next</button>
+            </div>
+            <!-- Quit game button might be controlled by softkey primarily, but can exist for focus -->
+            <button id="quit-game-button" style="display:none;" data-i18n-key="back_to_menu" data-softleft-key="softkey_menu">Menu</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen" style="display: none;" data-default-focus="play-again-mode-select-button">
+            <h2 class="screen-title" data-i18n-key="game_over_title">Game Over!</h2>
+            <p id="final-score-message"></p>
+            <div class="button-list">
+                <button id="play-again-mode-select-button" data-i18n-key="play_again_same_lang" data-softright-key="softkey_play">Play Again (Same Language)</button>
+                <button id="change-language-game-over-button" data-i18n-key="change_language" data-softright-key="softkey_select">Change Game Language</button>
+                <button id="main-menu-game-over-button" data-i18n-key="main_menu_label" data-softright-key="softkey_select">Main Menu</button>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" style="display:none;">
+            <p id="loading-overlay-message" data-i18n-key="loading_ellipsis">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Softkey Bar -->
+    <div id="softkey-bar">
+        <div id="softkey-left" class="softkey-label"></div>
+        <div id="softkey-center" class="softkey-label" data-i18n-key="softkey_select">Select</div>
+        <div id="softkey-right" class="softkey-label"></div>
+    </div>
+    <script src="https://static.kaiads.com/ads-sdk/ads-sdk.v5.min.js"></script>
+    <script src="kaiads.v5.min.js"></script>
+    <script src="polyfills.js"></script>
+    <script src="idb_helper.js"></script>
+    <script src="network_helper.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
