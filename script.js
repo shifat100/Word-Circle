@@ -138,15 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (xhr.status === 200) {
                         try {
                             var jsonData = JSON.parse(xhr.responseText);
-                            getKaiAd({
-                                publisher: '080b82ab-b33a-4763-a498-50f464567e49',
-                                app: 'word_puzzle',
-                                slot: 'word_puzzle',
-                                onerror: err => console.error('Custom catch:', err),
-                                onready: ad => {
-                                    ad.call('display');
-                                }
-                            });
+                           
                             if (successCallback) successCallback(jsonData);
                         } catch (e) {
                             var parseError = new Error('JSON parsing error for ' + url + ': ' + e.message);
@@ -1157,15 +1149,7 @@ document.addEventListener('DOMContentLoaded', function () {
             endGame();
         }
 
-        getKaiAd({
-            publisher: '080b82ab-b33a-4763-a498-50f464567e49',
-            app: 'word_puzzle',
-            slot: 'word_puzzle',
-            onerror: err => console.error('Custom catch:', err),
-            onready: ad => {
-                ad.call('display');
-            }
-        });
+        
     }
     function checkAnswer() {
         if (currentPuzzleIndex >= totalPuzzlesInGame || (answerInput && answerInput.disabled)) return;
@@ -1249,15 +1233,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         if (gameButtonsContainer) gameButtonsContainer.style.display = 'none';
         showScreen('game-over-screen');
-        getKaiAd({
-            publisher: '080b82ab-b33a-4763-a498-50f464567e49',
-            app: 'word_puzzle',
-            slot: 'word_puzzle',
-            onerror: err => console.error('Custom catch:', err),
-            onready: ad => {
-                ad.call('display');
-            }
-        });
+     
     }
     function quitGameToGameMode() {
         if (gameButtonsContainer) gameButtonsContainer.style.display = 'none';
@@ -1527,13 +1503,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    getKaiAd({
-        publisher: '080b82ab-b33a-4763-a498-50f464567e49',
-        app: 'word_puzzle',
-        slot: 'word_puzzle',
-        onerror: err => console.error('Custom catch:', err),
-        onready: ad => {
-            ad.call('display');
-        }
-    });
+
 });
+
