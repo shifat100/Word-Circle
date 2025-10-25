@@ -1453,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (['ArrowUp', 'ArrowDown'].indexOf(event.key) !== -1 && activeElement.type === "number") { // Check indexOf
                 return;
             } else if (['ArrowLeft', 'ArrowRight'].indexOf(event.key) !== -1 && activeElement.tagName === 'INPUT') { // Check indexOf
-                 if (event.key !== 'SoftLeft' && event.key !== 'F1' && event.key !== 'SoftRight' && event.key !== 'F2') return;
+                 if (event.key !== 'SoftLeft' && event.key !== 'Escape' && event.key !== 'SoftRight' && event.key !== 'F2') return;
             } else if (event.key === 'Backspace' && activeElement.tagName === 'INPUT' && activeElement.value.length > 0) {
                 return;
             }
@@ -1498,7 +1498,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                     handled = true;
                     break;
-                case 'SoftLeft': case 'F1': handleSoftKey('left'); handled = true; break;
+                case 'SoftLeft': case 'Escape': handleSoftKey('left'); handled = true; break;
                 case 'SoftRight': case 'F2': handleSoftKey('right'); handled = true; break;
                 case 'Backspace':
                     var backTargetButtonId = null; var directAction = null;
@@ -1615,5 +1615,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
 
 
