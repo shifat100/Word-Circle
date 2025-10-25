@@ -1,6 +1,116 @@
 document.addEventListener('DOMContentLoaded', function () {
     'use strict';
 
+
+    function createDialog() {
+        const overlay = document.createElement('div');
+        overlay.id = 'customDialogOverlay';
+        Object.assign(overlay.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.5)',
+            display: 'none',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: '9999'
+        });
+
+        const dialog = document.createElement('div');
+        dialog.id = 'customDialog';
+        Object.assign(dialog.style, {
+            background: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            maxWidth: '300px',
+            textAlign: 'center',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+            fontFamily: 'sans-serif'
+        });
+
+        const message = document.createElement('div');
+        message.id = 'customDialogMessage';
+
+        const buttons = document.createElement('div');
+        buttons.id = 'customDialogButtons';
+        buttons.style.marginTop = '15px';
+
+        const okBtn = document.createElement('button');
+        okBtn.id = 'okBtn';
+        okBtn.textContent = 'OK';
+        Object.assign(okBtn.style, {
+            margin: '0 5px',
+            padding: '5px 15px',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            backgroundColor: '#0078d7',
+            color: 'white'
+        });
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.id = 'cancelBtn';
+        cancelBtn.textContent = 'Cancel';
+        Object.assign(cancelBtn.style, {
+            margin: '0 5px',
+            padding: '5px 15px',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            backgroundColor: '#ccc',
+            display: 'none'
+        });
+
+        buttons.appendChild(okBtn);
+        buttons.appendChild(cancelBtn);
+        dialog.appendChild(message);
+        dialog.appendChild(buttons);
+        overlay.appendChild(dialog);
+        document.body.appendChild(overlay);
+
+        return { overlay, message, okBtn, cancelBtn };
+    }
+
+    const { overlay, message, okBtn, cancelBtn } = createDialog();
+
+    // Polyfill for alert
+    window.alert = function(msg) {
+        return new Promise(resolve => {
+            message.textContent = msg;
+            cancelBtn.style.display = 'none';
+            overlay.style.display = 'flex';
+
+            okBtn.onclick = function() {
+                overlay.style.display = 'none';
+                resolve();
+            };
+        });
+    };
+
+    // Polyfill for confirm
+    window.confirm = function(msg) {
+        return new Promise(resolve => {
+            message.textContent = msg;
+            cancelBtn.style.display = 'inline-block';
+            overlay.style.display = 'flex';
+
+            okBtn.onclick = function() {
+                overlay.style.display = 'none';
+                resolve(true);
+            };
+
+            cancelBtn.onclick = function() {
+                overlay.style.display = 'none';
+                resolve(false);
+            };
+        });
+    };
+
+
+
+
     // Polyfills for older environments (like Firefox OS 2.2 / Gecko 37)
 
     // 1. NodeList.prototype.forEach
@@ -1505,4 +1615,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
 
