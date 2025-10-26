@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     'use strict';
-function createDialog() {
+/*function createDialog() {
         const overlay = document.createElement('div');
         overlay.id = 'customDialogOverlay';
         Object.assign(overlay.style, {
@@ -108,7 +108,7 @@ function createDialog() {
         });
 
         setTimeout( function() {overlay.style.display = 'none'; resolve(false); },3000);
-    };
+    };*/
 
     // Polyfills for older environments (like Firefox OS 2.2 / Gecko 37)
 
@@ -1626,6 +1626,7 @@ function createDialog() {
     initializeApp();
 
 });
+
 
 
 
