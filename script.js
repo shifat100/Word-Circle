@@ -245,37 +245,7 @@ function createDialog() {
             return;
         }
 
-        getKaiAd({
-            publisher: '080b82ab-b33a-4763-a498-50f464567e49',
-            app: 'word_puzzle',
-            slot: 'word_puzzle',
-            onerror: err => console.error('KaiAd Error:', err),
-            onready: ad => {
-                // Ad is ready to be shown.
-                isAdShowing = true;
-
-                // Hide the app's softkeys to allow the ad's softkeys to be visible.
-                softkeyBar.style.display = 'none';
-
-
-                // Register an event listener for when the ad is closed.
-                ad.on('close', () => {
-                    isAdShowing = false;
-
-                    // Restore the app's softkeys.
-                    softkeyBar.style.display = 'flex';
-                    // Refresh the app's UI to its previous state.
-                    updateSoftkeys();
-                    if (currentFocusIndex !== -1 && focusableElements[currentFocusIndex]) {
-                        setFocus(currentFocusIndex);
-                    }
-                    console.log("Ad closed, UI restored.");
-                });
-
-                // Now, display the ad.
-                ad.call('display');
-            }
-        });
+      
     }
     // --- END AD HANDLING LOGIC ---
 
@@ -1667,3 +1637,4 @@ function createDialog() {
     initializeApp();
 
 });
+
