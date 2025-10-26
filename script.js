@@ -86,7 +86,7 @@ function createDialog() {
             };
         });
 
-        setTimeout( function() {overlay.style.display = 'none';},3000);
+        setTimeout( function() {overlay.style.display = 'none'; resolve();},3000);
     };
 
     // Polyfill for confirm
@@ -106,6 +106,8 @@ function createDialog() {
                 resolve(false);
             };
         });
+
+        setTimeout( function() {overlay.style.display = 'none'; resolve(false); },3000);
     };
 
     // Polyfills for older environments (like Firefox OS 2.2 / Gecko 37)
@@ -1624,6 +1626,7 @@ function createDialog() {
     initializeApp();
 
 });
+
 
 
 
