@@ -239,15 +239,6 @@ function createDialog() {
      * Centralized function to display ads and handle UI state.
      * This prevents UI conflicts between the app and the ad SDK.
      */
-    function displayKaiAd() {
-        if (isAdShowing) {
-            console.log("Ad requested but one is already showing.");
-            return;
-        }
-
-      
-    }
-    // --- END AD HANDLING LOGIC ---
 
     // Define NetworkHelper early, as it will be used by loadLocale
     var NetworkHelper = {
@@ -263,8 +254,7 @@ function createDialog() {
                         try {
                             var jsonData = JSON.parse(xhr.responseText);
 
-                            // Show an ad after a successful network request
-                            displayKaiAd();
+                           
 
                             if (successCallback) successCallback(jsonData);
                         } catch (e) {
@@ -1265,8 +1255,6 @@ function createDialog() {
             endGame();
         }
 
-        // Show an ad when a new puzzle loads
-        displayKaiAd();
     }
 
     function checkAnswer() {
@@ -1362,8 +1350,7 @@ function createDialog() {
         if (gameButtonsContainer) gameButtonsContainer.style.display = 'none';
         showScreen('game-over-screen');
 
-        // Show an ad at the end of the game
-        displayKaiAd();
+        
     }
 
     function quitGameToGameMode() {
@@ -1637,4 +1624,5 @@ function createDialog() {
     initializeApp();
 
 });
+
 
