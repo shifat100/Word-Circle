@@ -498,7 +498,7 @@ function createDialog() {
     var serverManifest = null;
     var localLanguagesMetadata = [];
     var previousScreen = null;
-    var SERVER_BASE_URL = 'http:/\/shifat100.github.io/Word-Circle/';
+    var SERVER_BASE_URL = './';
     var MANIFEST_FILE_PATH = 'data/manifest.json';
     var focusableElements = [];
     var currentFocusIndex = -1;
@@ -1624,5 +1624,6 @@ function createDialog() {
     initializeApp();
 
 });
+
 
 
