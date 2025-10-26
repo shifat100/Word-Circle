@@ -20,12 +20,13 @@
       },
       {
         "code": "hn",
-        "name": "Hindi",
+        "name": "हिंदी",
         "version": "2.0",
         "path": "data/hn_puzzles.json"
       }
     ]
   }
+
 
 
 
