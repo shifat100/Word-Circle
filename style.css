@@ -1,111 +1,267 @@
-/* style.css */
+/* ===== KaiOS Universal Responsive Style ===== */
+
+/* Base */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* Common sans-serif stack */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* Light gray background */
-    color: #333;
-    font-size: 16px; /* Base font size for KaiOS, adjust as needed */
+    background-color: #f0f0f0;
+    color: #222;
+    font-size: 14px; /* Default smaller base for tiny screens */
     height: 100vh;
-    overflow: hidden; /* Prevent body scroll */
-    -moz-user-select: none; /* Prevent text selection */
+    overflow: hidden;
+    -moz-user-select: none;
 }
 
+/* Container */
 .container {
     width: 100%;
-    height: calc(100% - 30px); /* Full height minus softkey bar */
-    overflow: hidden; /* Prevent container scroll, individual screens will scroll if needed */
+    height: calc(100% - 28px); /* Adjust for softkey bar */
     position: relative;
+    overflow: hidden;
 }
 
+/* Screen */
 .screen {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */ /* Changed to space-between or flex-start for more control */
-    justify-content: flex-start; /* Align content to top by default */
-    padding: 8px;
+    justify-content: flex-start;
+    padding: 4px;
     box-sizing: border-box;
-    overflow-y: auto; /* Allow vertical scroll if content overflows screen */
-    background-color: #fff; /* White background for screens */
+    overflow-y: auto;
+    background-color: #fff;
 }
 
+/* Title */
 .screen-title {
-    font-size: 1.1em; /* Slightly larger for titles */
-    color: #007bff; /* A theme color */
-    margin-top: 0;
-    margin-bottom: 8px;
+    font-size: 1em;
+    color: #007bff;
+    margin: 0 0 4px 0;
     text-align: center;
     width: 100%;
-    padding-bottom: 5px;
     border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
 }
 
+/* Text */
 .info-text {
-    font-size: 0.9em;
-    margin-bottom: 10px;
+    font-size: 0.85em;
+    margin-bottom: 6px;
     text-align: center;
 }
 
+/* Version label */
 .app-version {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 0.7em;
-    color: #aaa;
+    bottom: 3px;
+    right: 4px;
+    font-size: 0.65em;
+    color: #999;
 }
 
-
-/* Button Styling */
+/* Buttons */
 button {
     display: block;
-    width: calc(100% - 10px); /* Buttons take most of the width */
-    padding: 8px 10px;
-    margin: 4px auto; /* Reduced margin */
-    font-size: 0.95em; /* Slightly smaller font for buttons */
-    background-color: #e9e9e9; /* Light gray buttons */
+    width: 94%;
+    padding: 5px;
+    margin: 3px auto;
+    font-size: 0.9em;
+    background-color: #e9e9e9;
     color: #333;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 2px;
     text-align: center;
     box-sizing: border-box;
-    cursor: default; /* KaiOS doesn't use mouse cursors typically */
 }
-
 button:disabled {
     background-color: #d0d0d0;
     color: #888;
-    border-color: #bbb;
 }
-
 .kaios-focus {
-    background-color: #007bff; /* Primary color for focus */
-    color: white;
+    background-color: #007bff;
+    color: #fff;
     border-color: #0056b3;
-    outline: none; /* Remove default outline */
 }
 
-.secondary-button {
-    background-color: #f8f9fa;
-    border-color: #ced4da;
+/* Input fields */
+input[type="text"], input[type="number"] {
+    width: 94%;
+    padding: 6px;
+    margin: 6px auto;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
 }
-.secondary-button.kaios-focus {
-    background-color: #5a6268;
-    border-color: #4e555b;
-    color: white;
+input.kaios-focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 1px #007bff;
 }
 
-.button-list {
+/* Scrollable lists */
+.scrollable-list {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-height: calc(100% - 70px);
+    overflow-y: auto;
+    border: 1px solid #eee;
+    margin-bottom: 5px;
 }
-.button-list.single-col-buttons {
-    max-width: 200px; /* For screens with fewer, more prominent buttons */
-    margin: auto;
+.scrollable-list button {
+    width: calc(100% - 4px);
+    margin: 1px;
+    text-align: left;
+    padding-left: 8px;
+}
+
+/* Language items */
+.language-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 2px;
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    box-sizing: border-box;
+}
+.language-item span {
+    flex-grow: 1;
+    font-size: 0.8em;
+    padding-right: 3px;
+}
+.language-item button {
+    margin-left: 3px;
+    padding: 3px 4px;
+    font-size: 0.75em;
+    min-width: 55px;
+}
+.delete-lang-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+.delete-lang-button.kaios-focus {
+    background-color: #b71c1c;
+}
+
+/* Game Header */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2px 4px;
+    font-size: 0.75em;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+}
+.game-header .center {
+    text-align: center;
+    flex: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Puzzle display */
+.puzzle-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+    padding: 2px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.puzzle-char {
+    font-size: 1.1em;
+    padding: 1px 3px;
+    margin: 1px;
+    background-color: #e9ecef;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Results */
+.result-message {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 4px 0;
+    min-height: 1em;
+    text-align: center;
+}
+.result-message.correct { color: #28a745; }
+.result-message.incorrect { color: #dc3545; }
+.result-message.warning { color: #ffc107; }
+
+/* Content box */
+.content-box {
+    width: 100%;
+    padding: 2px;
+    font-size: 0.85em;
+    line-height: 1.2;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    overflow-y: auto;
+}
+
+/* Loading overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    font-size: 1em;
+}
+
+/* Softkey bar */
+#softkey-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 28px;
+    background-color: #222;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+    box-sizing: border-box;
+    z-index: 5000;
+}
+.softkey-label {
+    font-size: 0.75em;
+    text-align: center;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (min-width: 200px) and (max-width: 260px) {
+    body { font-size: 15px; }
+    button, input { font-size: 0.95em; padding: 6px; }
+    .screen-title { font-size: 1.1em; }
+}
+
+@media (min-width: 261px) {
+    body { font-size: 16px; }
+    .screen { padding: 8px; }
+    button { padding: 8px; }
+    }    margin: auto;
 }
 
 
@@ -322,4 +478,5 @@ input[type="text"].kaios-focus, input[type="number"].kaios-focus {
 }
 #softkey-left { text-align: left; }
 #softkey-center { font-weight: bold; }
+
 #softkey-right { text-align: right; }
